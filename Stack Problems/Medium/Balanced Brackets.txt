@@ -1,0 +1,47 @@
+string isBalanced(string s) 
+{
+// Check Function
+    stack <char>check ; 
+    char ch; 
+    
+    int l  = s.length();
+    // Traversing 's'
+    for (int i = 0; i < l; i++)  
+    { 
+        if (s[i] == '(' || s[i] == '[' || s[i] == '{')  
+        // check for Opening Brackets
+        {
+            check.push(s[i]); continue; 
+            // add (push) to the Top of the Stack
+        } 
+  
+        // Test Case - if the String starts with a closing bracket i.e.
+        // either ')', '}', ']', the Stack is empty and hence unbalanced 
+        
+        if (check.empty())  return "NO";
+        
+        switch (s[i]) 
+        { 
+            // For every case - Store the Top (Latest) Element of the Stack in Ch
+            // Remove the element in case of Nested Brackets
+            case ')':
+                ch = check.top(); 
+                check.pop(); 
+                if (ch == '{' || ch == '[') return "NO"; 
+                break; 
+    
+            case '}': 
+                ch = check.top(); 
+                check.pop();
+                if (ch == '(' || ch == '[') return "NO"; 
+                break; 
+    
+            case ']': 
+                ch = check.top(); 
+                check.pop();
+                if (ch == '(' || ch == '{') return "NO"; 
+                break; 
+        } 
+    }     
+    if(check.empty()) return "YES";
+}
